@@ -58,7 +58,7 @@ jobs:
           cd ..
           # recover all we need 
           mkdir -p ~/seafile-tipi/lib-seafile 
-          mkdir -p ~/seafile-tipi/lib-seafile 
+          mkdir -p ~/seafile-tipi/seafile-exe 
           cp /lib/x86_64-linux-gnu/libcrypto.so.1.0.0 ~/seafile-tipi/lib-seafile/
           cp /usr/lib/x86_64-linux-gnu/libcurl.so.4 ~/seafile-tipi/lib-seafile/
           cp /usr/lib/x86_64-linux-gnu/libevent_pthreads-2.0.so.5 ~/seafile-tipi/lib-seafile/
@@ -88,8 +88,8 @@ jobs:
           cp /usr/lib/x86_64-linux-gnu/libheimbase.so.1 ~/seafile-tipi/lib-seafile/
           cp /usr/lib/x86_64-linux-gnu/libhx509.so.5 ~/seafile-tipi/lib-seafile/
           cp /lib/x86_64-linux-gnu/libcrypt.so.1 ~/seafile-tipi/lib-seafile/
-          cp /usr/bin/seaf-daemon ~/seafile-tipi/lib-seafile/
-          cp /usr/bin/seaf-cli ~/seafile-tipi/lib-seafile/
+          cp /usr/bin/seaf-daemon ~/seafile-tipi/seafile-exe/
+          cp /usr/bin/seaf-cli ~/seafile-tipi/seafile-exe/
           cd ~/
           zip -r seafile-tipi.zip  ~/seafile-tipi
       - uses: actions/upload-artifact@v3

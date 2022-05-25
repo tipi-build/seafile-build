@@ -90,6 +90,7 @@ jobs:
           cp /lib/x86_64-linux-gnu/libcrypt.so.1 ~/seafile-tipi/lib-seafile/
           cp /usr/lib/x86_64-linux-gnu/libgobject-2.0.so.0  ~/seafile-tipi/lib-seafile/
           cp /lib/x86_64-linux-gnu/libglib-2.0.so.0 ~/seafile-tipi/lib-seafile/
+          cp /usr/lib/x86_64-linux-gnu/libffi.so.6 ~/seafile-tipi/lib-seafile/
           cp /usr/bin/seaf-daemon ~/seafile-tipi/seafile-exe/
           cp /usr/bin/seaf-cli ~/seafile-tipi/seafile-exe/
           cd ~/

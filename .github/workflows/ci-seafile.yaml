@@ -39,21 +39,26 @@ jobs:
           export PREFIX=/usr
           export PKG_CONFIG_PATH="$PREFIX/lib/pkgconfig:$PKG_CONFIG_PATH"
           export PATH="$PREFIX/bin:$PATH"
+
+          # enable build optimizations
+          export CFLAGS="-O3 -pipe"
+          export CXXFLAGS="-O3 -pipe"
+
           cd libsearpc-3.2.0
           ./autogen.sh
           ./configure --prefix=$PREFIX
-          make
+          make -j4
           sudo make install
           cd ..
           cd seafile-8.0.3/
           ./autogen.sh
           ./configure --prefix=$PREFIX --disable-fuse
-          make
+          make -j4
           sudo make install
           cd ..
           cd seafile-client-8.0.3/
-          cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$PREFIX .
-          make
+          cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$PREFIX -DCMAKE_CXX_FLAGS_RELEASE="-O3" .
+          make -j4
           sudo make install
           cd ..
           # recover all we need 

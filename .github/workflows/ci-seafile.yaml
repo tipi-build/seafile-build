@@ -47,18 +47,18 @@ jobs:
           cd libsearpc-3.2.0
           ./autogen.sh
           ./configure --prefix=$PREFIX
-          make -j4
+          make -j$(nproc)
           sudo make install
           cd ..
           cd seafile-8.0.3/
           ./autogen.sh
           ./configure --prefix=$PREFIX --disable-fuse
-          make -j4
+          make -j$(nproc)
           sudo make install
           cd ..
           cd seafile-client-8.0.3/
           cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$PREFIX -DCMAKE_CXX_FLAGS_RELEASE="-O3" .
-          make -j4
+          make -j$(nproc)
           sudo make install
           cd ..
           # recover all we need 

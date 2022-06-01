@@ -130,7 +130,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          owner: nxxm 
+          owner: tipi-build 
           repo: seafile-build
           commitish: main
           tag_name: ${{ env.version_in_development }}

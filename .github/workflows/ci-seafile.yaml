@@ -118,6 +118,7 @@ jobs:
           rm -rf ~/tipi_seafile_client/pysearpc/test*
 
           zip -r tipi_seafile_client.zip  tipi_seafile_client/
+          cp tipi_seafile_client.zip tipi_seafile_client_artifact.zip
           mv tipi_seafile_client.zip /tipi-${{ env.version_in_development }}-seafile-linux.zip
           cp tipi_seafile_client.zip tipi_seafile_client_artifact.zip
       - uses: actions/upload-artifact@v3

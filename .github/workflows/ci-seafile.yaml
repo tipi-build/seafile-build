@@ -119,7 +119,7 @@ jobs:
       - uses: actions/upload-artifact@v3
         with:
           name: seafile_artifact
-          path: ~/seafile-tipi.zip
+          path: ~/tipi_seafile_client-tipi.zip
 
 
 

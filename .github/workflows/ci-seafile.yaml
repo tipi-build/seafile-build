@@ -117,11 +117,12 @@ jobs:
           rm -rf ~/tipi_seafile_client/pysearpc/Make*
           rm -rf ~/tipi_seafile_client/pysearpc/test*
 
-          zip -r tipi_seafile_client-tipi.zip  tipi_seafile_client/
+          zip -r tipi_seafile_client.zip  tipi_seafile_client/
+          cp tipi_seafile_client.zip tipi_seafile_client_artifact.zip
       - uses: actions/upload-artifact@v3
         with:
           name: seafile_artifact
-          path:  ~/tipi_seafile_client-tipi.zip
+          path:  ~/tipi_seafile_client_artifact.zip
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
@@ -142,7 +143,7 @@ jobs:
            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./tipi_seafile_client-tipi.zip
+          asset_path: ~/tipi_seafile_client.zip
           asset_name: tipi-${{ env.version_in_development }}-seafile-linux.zip
           asset_content_type: application/zip
 

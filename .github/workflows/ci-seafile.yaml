@@ -16,6 +16,7 @@ jobs:
       - uses: actions/checkout@v2
       - name: build seafile
         run: |
+          mv ./seaf-daemon  ~/
           cd ~/
           #install deps 
           apt update -y

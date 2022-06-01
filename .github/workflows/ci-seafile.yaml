@@ -13,8 +13,10 @@ jobs:
     runs-on: ubuntu-20.04
     container: ubuntu:16.04
     steps:
+      - uses: actions/checkout@v2
       - name: build seafile
         run: |
+          cd ~/
           #install deps 
           apt update -y
           apt install sudo -y
@@ -61,46 +63,58 @@ jobs:
           make -j$(nproc)
           sudo make install
           cd ..
+          # create usefull dir 
+          mkdir -p ~/tipi_seafile_client/daemon/lib
+          mkdir -p ~/tipi_seafile_client/seafile
+          mkdir -p ~/tipi_seafile_client/pysearpc
+
           # recover all we need 
-          mkdir -p ~/seafile-tipi/lib-seafile 
-          mkdir -p ~/seafile-tipi/seafile-exe 
-          cp /lib/x86_64-linux-gnu/libcrypto.so.1.0.0 ~/seafile-tipi/lib-seafile/
-          cp /usr/lib/x86_64-linux-gnu/libcurl.so.4 ~/seafile-tipi/lib-seafile/
-          cp /usr/lib/x86_64-linux-gnu/libevent_pthreads-2.0.so.5 ~/seafile-tipi/lib-seafile/
-          cp /usr/lib/x86_64-linux-gnu/libevent-2.0.so.5 ~/seafile-tipi/lib-seafile/
-          cp /usr/lib/x86_64-linux-gnu/libevent_core-2.0.so.5 ~/seafile-tipi/lib-seafile/
-          cp /usr/lib/x86_64-linux-gnu/libjansson.so.4 ~/seafile-tipi/lib-seafile/
-          cp /usr/lib/x86_64-linux-gnu/libidn.so.11 ~/seafile-tipi/lib-seafile/
-          cp /usr/lib/x86_64-linux-gnu/libsasl2.so.2 ~/seafile-tipi/lib-seafile/
-          cp /usr/lib/libsearpc.so.1 ~/seafile-tipi/lib-seafile/
-          cp /usr/lib/x86_64-linux-gnu/libsqlite3.so.0 ~/seafile-tipi/lib-seafile/
-          cp /lib/x86_64-linux-gnu/libssl.so.1.0.0 ~/seafile-tipi/lib-seafile/
-          cp /usr/lib/x86_64-linux-gnu/libtasn1.so.6 ~/seafile-tipi/lib-seafile/
-          cp /lib/x86_64-linux-gnu/libuuid.so.1 ~/seafile-tipi/lib-seafile/
-          cp /usr/lib/x86_64-linux-gnu/libwind.so.0 ~/seafile-tipi/lib-seafile/
-          cp /lib/x86_64-linux-gnu/libz.so.1 ~/seafile-tipi/lib-seafile/
-          cp /usr/lib/x86_64-linux-gnu/librtmp.so.1 ~/seafile-tipi/lib-seafile/
-          cp /usr/lib/x86_64-linux-gnu/liblber-2.4.so.2 ~/seafile-tipi/lib-seafile/
-          cp /usr/lib/x86_64-linux-gnu/libldap_r-2.4.so.2 ~/seafile-tipi/lib-seafile/
-          cp /usr/lib/x86_64-linux-gnu/libhogweed.so.4 ~/seafile-tipi/lib-seafile/
-          cp /usr/lib/x86_64-linux-gnu/libnettle.so.6 ~/seafile-tipi/lib-seafile/
-          cp /usr/lib/x86_64-linux-gnu/libgssapi.so.3 ~/seafile-tipi/lib-seafile/
-          cp /usr/lib/x86_64-linux-gnu/libheimntlm.so.0 ~/seafile-tipi/lib-seafile/
-          cp /usr/lib/x86_64-linux-gnu/libkrb5.so.26 ~/seafile-tipi/lib-seafile/
-          cp /usr/lib/x86_64-linux-gnu/libasn1.so.8 ~/seafile-tipi/lib-seafile/
-          cp /usr/lib/x86_64-linux-gnu/libhcrypto.so.4 ~/seafile-tipi/lib-seafile/
-          cp /usr/lib/x86_64-linux-gnu/libroken.so.18 ~/seafile-tipi/lib-seafile/
-          cp /usr/lib/x86_64-linux-gnu/libheimbase.so.1 ~/seafile-tipi/lib-seafile/
-          cp /usr/lib/x86_64-linux-gnu/libhx509.so.5 ~/seafile-tipi/lib-seafile/
-          cp /lib/x86_64-linux-gnu/libcrypt.so.1 ~/seafile-tipi/lib-seafile/
-          cp /usr/lib/x86_64-linux-gnu/libgobject-2.0.so.0  ~/seafile-tipi/lib-seafile/
-          cp /lib/x86_64-linux-gnu/libglib-2.0.so.0 ~/seafile-tipi/lib-seafile/
-          cp /usr/lib/x86_64-linux-gnu/libffi.so.6 ~/seafile-tipi/lib-seafile/
-          cp /lib/x86_64-linux-gnu/libpcre.so.3 ~/seafile-tipi/lib-seafile/
-          cp /usr/bin/seaf-daemon ~/seafile-tipi/seafile-exe/
-          cp /usr/bin/seaf-cli ~/seafile-tipi/seafile-exe/
-          cd ~/
-          zip -r seafile-tipi.zip  ~/seafile-tipi
+          cp /lib/x86_64-linux-gnu/libcrypto.so.1.0.0 ~/tipi_seafile_client/daemon/lib
+          cp /usr/lib/x86_64-linux-gnu/libcurl.so.4 ~/tipi_seafile_client/daemon/lib
+          cp /usr/lib/x86_64-linux-gnu/libevent_pthreads-2.0.so.5 ~/tipi_seafile_client/daemon/lib
+          cp /usr/lib/x86_64-linux-gnu/libevent-2.0.so.5 ~/tipi_seafile_client/daemon/lib
+          cp /usr/lib/x86_64-linux-gnu/libevent_core-2.0.so.5 ~/tipi_seafile_client/daemon/lib
+          cp /usr/lib/x86_64-linux-gnu/libjansson.so.4 ~/tipi_seafile_client/daemon/lib
+          cp /usr/lib/x86_64-linux-gnu/libidn.so.11 ~/tipi_seafile_client/daemon/lib
+          cp /usr/lib/x86_64-linux-gnu/libsasl2.so.2 ~/tipi_seafile_client/daemon/lib
+          cp /usr/lib/libsearpc.so.1 ~/tipi_seafile_client/daemon/lib
+          cp /usr/lib/x86_64-linux-gnu/libsqlite3.so.0 ~/tipi_seafile_client/daemon/lib
+          cp /lib/x86_64-linux-gnu/libssl.so.1.0.0 ~/tipi_seafile_client/daemon/lib
+          cp /usr/lib/x86_64-linux-gnu/libtasn1.so.6 ~/tipi_seafile_client/daemon/lib
+          cp /lib/x86_64-linux-gnu/libuuid.so.1 ~/tipi_seafile_client/daemon/lib
+          cp /usr/lib/x86_64-linux-gnu/libwind.so.0 ~/tipi_seafile_client/daemon/lib
+          cp /lib/x86_64-linux-gnu/libz.so.1 ~/tipi_seafile_client/daemon/lib
+          cp /usr/lib/x86_64-linux-gnu/librtmp.so.1 ~/tipi_seafile_client/daemon/lib
+          cp /usr/lib/x86_64-linux-gnu/liblber-2.4.so.2 ~/tipi_seafile_client/daemon/lib
+          cp /usr/lib/x86_64-linux-gnu/libldap_r-2.4.so.2 ~/tipi_seafile_client/daemon/lib
+          cp /usr/lib/x86_64-linux-gnu/libhogweed.so.4 ~/tipi_seafile_client/daemon/lib
+          cp /usr/lib/x86_64-linux-gnu/libnettle.so.6 ~/tipi_seafile_client/daemon/lib
+          cp /usr/lib/x86_64-linux-gnu/libgssapi.so.3 ~/tipi_seafile_client/daemon/lib
+          cp /usr/lib/x86_64-linux-gnu/libheimntlm.so.0 ~/tipi_seafile_client/daemon/lib
+          cp /usr/lib/x86_64-linux-gnu/libkrb5.so.26 ~/tipi_seafile_client/daemon/lib
+          cp /usr/lib/x86_64-linux-gnu/libasn1.so.8 ~/tipi_seafile_client/daemon/lib
+          cp /usr/lib/x86_64-linux-gnu/libhcrypto.so.4 ~/tipi_seafile_client/daemon/lib
+          cp /usr/lib/x86_64-linux-gnu/libroken.so.18 ~/tipi_seafile_client/daemon/lib
+          cp /usr/lib/x86_64-linux-gnu/libheimbase.so.1 ~/tipi_seafile_client/daemon/lib
+          cp /usr/lib/x86_64-linux-gnu/libhx509.so.5 ~/tipi_seafile_client/daemon/lib
+          cp /lib/x86_64-linux-gnu/libcrypt.so.1 ~/tipi_seafile_client/daemon/lib
+          cp /usr/lib/x86_64-linux-gnu/libgobject-2.0.so.0  ~/tipi_seafile_client/daemon/lib
+          cp /lib/x86_64-linux-gnu/libglib-2.0.so.0 ~/tipi_seafile_client/daemon/lib
+          cp /usr/lib/x86_64-linux-gnu/libffi.so.6 ~/tipi_seafile_client/daemon/lib
+          cp /lib/x86_64-linux-gnu/libpcre.so.3 ~/tipi_seafile_client/daemon/lib
+          cp /usr/bin/seaf-daemon ~/tipi_seafile_client/daemon/seaf-daemon-bin
+          cp /usr/bin/seaf-cli ~/tipi_seafile_client/
+          mv ~/seaf-daemon ~/tipi_seafile_client/daemon/
+          chmod +x ~/tipi_seafile_client/daemon/seaf-daemon
+
+          cp -a ~/seafile-8.0.3/python/seafile ~/tipi_seafile_client/
+          rm -rf ~/tipi_seafile_client/seafile/Make*
+
+          cp -a ~/libsearpc-3.2.0/pysearpc ~/tipi_seafile_client/
+          rm -rf ~/tipi_seafile_client/pysearpc/Make*
+          rm -rf ~/tipi_seafile_client/pysearpc/test*
+
+          zip -r tipi_seafile_client-tipi.zip  ~/tipi_seafile_client
       - uses: actions/upload-artifact@v3
         with:
           name: seafile_artifact

@@ -1,0 +1,6 @@
+#!/bin/bash
+cwd=$(dirname "${0}")
+export LD_LIBRARY_PATH=${cwd}/lib/
+echo ${cwd}
+${cwd}/seaf-daemon-bin $@
+exit $?

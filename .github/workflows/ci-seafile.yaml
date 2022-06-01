@@ -116,7 +116,6 @@ jobs:
           rm -rf ~/tipi_seafile_client/pysearpc/test*
 
           zip -r tipi_seafile_client-tipi.zip  tipi_seafile_client/
-          pwd
       - uses: actions/upload-artifact@v3
         with:
           name: seafile_artifact
